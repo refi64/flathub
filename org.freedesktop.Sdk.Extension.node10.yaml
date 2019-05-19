@@ -8,12 +8,28 @@ separate-locales: false
 appstream-compose: false
 build-options:
   prefix: /usr/lib/sdk/node10
+  prepend-path: /usr/lib/sdk/node10/bin
 modules:
   - name: node
     sources:
       - type: archive
         url: https://nodejs.org/dist/v10.15.3/node-v10.15.3.tar.gz
         sha256: db460a63d057ac015b75bb6a879fcbe2fefaaf22afa4b6f6445b9db61ce2270d
+    modules:
+      - name: python2
+        config-opts:
+          - --enable-static
+          - --disable-shared
+          - --with-ensurepip=yes
+          - --with-system-expat
+          - --with-system-ffi
+          - --enable-loadable-sqlite-extensions
+          - --with-dbmliborder=gdbm
+          - --enable-unicode=ucs4
+        sources:
+          - type: archive
+            url: https://www.python.org/ftp/python/2.7.16/Python-2.7.16.tgz
+            md5: f1a2ace631068444831d01485466ece0
 
   - name: scripts
     buildsystem: simple
