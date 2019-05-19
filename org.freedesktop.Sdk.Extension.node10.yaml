@@ -9,6 +9,11 @@ appstream-compose: false
 build-options:
   prefix: /usr/lib/sdk/node10
   prepend-path: /usr/lib/sdk/node10/bin
+  strip: true
+cleanup:
+  - /lib/*.a
+  - /share/man
+  - /share/doc
 modules:
   - name: node
     sources:
