@@ -34,7 +34,7 @@ modules:
         sources:
           - type: archive
             url: https://www.python.org/ftp/python/2.7.16/Python-2.7.16.tgz
-            md5: f1a2ace631068444831d01485466ece0
+            sha256: 01da813a3600876f03f46db11cc5c408175e99f03af2ba942ef324389a83bad5
 
   - name: scripts
     buildsystem: simple
