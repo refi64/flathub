@@ -1,0 +1,64 @@
+app-id: org.freedesktop.Sdk.Extension.rr
+branch: '18.08'
+runtime: org.freedesktop.Sdk
+runtime-version: '18.08'
+sdk: org.freedesktop.Sdk
+build-extension: true
+separate-locales: false
+appstream-compose: false
+build-options:
+  prefix: /usr/lib/sdk/rr
+  append-path: /usr/lib/sdk/rr/bin
+  append-ld-library-path: /usr/lib/sdk/rr/lib
+  append-pkg-config-path: /usr/lib/sdk/rr/lib/pkgconfig
+modules:
+  - name: capnproto
+    buildsystem: cmake-ninja
+    config-opts:
+      - '-DBUILD_TESTING=OFF'
+      - '-DBUILD_SHARED_LIBS=ON'
+      - '-DCMAKE_CXX_FLAGS=-DCAPNP_INCLUDE_DIR=\"/usr/lib/sdk/rr/include\"'
+    sources:
+      - type: git
+        url: https://github.com/capnproto/capnproto
+        tag: v0.7.0
+    cleanup:
+      - '/bin'
+      - '/include'
+      - '/lib/libkj-*.so*'
+      - '/lib/libcapnpc.so*'
+      - '/lib/libcapnp-*.so*'
+      - '/lib/cmake'
+      - '/lib/pkgconfig'
+      - '*.a'
+
+  - name: rr
+    buildsystem: cmake-ninja
+    config-opts:
+      - '-DBUILD_TESTS=OFF'
+      - '-Ddisable32bit=ON'
+      - '-DCMAKE_BUILD_TYPE=Release'
+      - '-DCMAKE_CXX_FLAGS=-std=c++14'
+    sources:
+      - type: git
+        url: https://github.com/mozilla/rr
+        tag: '5.2.0'
+      - type: patch
+        path: 0001-Remove-ucontext_t-rt_sigframe-from-kernel-abi.patch
+      - type: patch
+        path: 0001-Update-to-C-14.patch
+
+  - name: scripts
+    buildsystem: simple
+    build-commands:
+      - 'cp enable.sh /usr/lib/sdk/rr'
+      - 'install -Dm 644 -t /usr/lib/sdk/rr/share/metainfo org.freedesktop.Sdk.Extension.rr.appdata.xml'
+      - 'appstream-compose --basename=org.freedesktop.Sdk.Extension.rr --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.Sdk.Extension.rr'
+    sources:
+      - type: script
+        dest-filename: enable.sh
+        commands:
+          - 'export PATH=$PATH:/usr/lib/sdk/rr/bin'
+          - 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/sdk/rr/lib'
+      - type: file
+        path: org.freedesktop.Sdk.Extension.rr.appdata.xml

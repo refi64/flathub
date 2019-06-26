@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="runtime">
+  <id>org.freedesktop.Sdk.Extension.rr</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>rr debugger SDK extension</name>
+  <summary>rr debugger SDK extension</summary>
+  <description>
+    <p>This SDK extensions allows you to debug apps via the rr replaying debugger.</p>
+  </description>
+  <url type="homepage">https://rr-project.org/</url>
+</component>
