@@ -4,7 +4,7 @@
   <launchable type="desktop-id">net.sourceforge.QtSpim.desktop</launchable>
   <name>QtSpim</name>
   <developer_name>James Larus</developer_name>
-  <summary>An easy to use, light-weight, on-demand virus scanner for Linux systems</summary>
+  <summary>A self-contained simulator that runs MIPS32 programs</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>BSD-3-Clause</project_license>
   <url type="homepage">http://spimsimulator.sourceforge.net/</url>
