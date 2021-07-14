@@ -225,7 +225,8 @@ modules:
           - patches/0022-content-Disable-the-WASM-trap-handler-on-Linux.patch
           - patches/0023-Use-the-host-Java-install-for-Closure.patch
           - patches/0024-Clang-build-script-Allow-passing-a-prebuilt-Clang-fo.patch
-          - patches/0025-build-Remove-arm64-tool-prefix.patch
+          # - patches/0025-build-Remove-arm64-tool-prefix.patch
+          - patches/test-toolprefix-fix.patch
       - type: file
         path: org.chromium.Chromium.desktop
       - type: file
